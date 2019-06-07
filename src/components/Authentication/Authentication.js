@@ -5,32 +5,34 @@ import SignInIcon from './SignInIcon/SignInIcon';
 import styles from './Authentication.module.css';
 
 export default class Authentication extends Component {
-  state = { name: '' };
+  state = { userName: '' };
 
   handleChangeInput = e => {
     const { value } = e.target;
-    this.setState({ name: value });
+    this.setState({ userName: value });
   };
 
   handleSubmitForm = e => {
     e.preventDefault();
-    console.log(this.state);
+    const { signIn } = this.props;
+    signIn(this.state);
+
     this.resetForm();
   };
 
   resetForm = () => {
-    this.setState({ name: '' });
+    this.setState({ userName: '' });
   };
 
   render() {
-    const { name } = this.state;
+    const { userName } = this.state;
     return (
       <section className={styles.authentication}>
         <form className={styles.form} onSubmit={this.handleSubmitForm}>
           <input
             className={styles.input}
             type="text"
-            value={name}
+            value={userName}
             onChange={this.handleChangeInput}
             placeholder="Your name"
           />

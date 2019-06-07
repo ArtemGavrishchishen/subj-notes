@@ -9,11 +9,11 @@ const INIT_AUTH = {
 
 function tokenReducer(state = INIT_AUTH.token, { type, payload }) {
   switch (type) {
-    case types.FETCH_SUCCESS:
+    case types.LOGIN_SUCCESS:
       return payload;
 
     case types.SIGN_OUT:
-    case types.FETCH_ERROR:
+    case types.LOGIN_ERROR:
       return INIT_AUTH.token;
 
     default:
@@ -23,11 +23,11 @@ function tokenReducer(state = INIT_AUTH.token, { type, payload }) {
 
 function isAuthenticatedReducer(state = INIT_AUTH.isAuthenticated, { type }) {
   switch (type) {
-    case types.FETCH_SUCCESS:
+    case types.LOGIN_SUCCESS:
       return true;
 
     case types.SIGN_OUT:
-    case types.FETCH_ERROR:
+    case types.LOGIN_ERROR:
       return INIT_AUTH.isAuthenticated;
 
     default:

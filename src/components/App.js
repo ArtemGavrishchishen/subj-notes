@@ -6,15 +6,15 @@ import Authentication from './Authentication/Authentication';
 import NoteEditor from './NoteEditor/NoteEditor';
 import NoteList from './NoteList/NoteList';
 
-import { authActions, authSelectors } from '../redux/auth';
+import { authOperations, authSelectors } from '../redux/auth';
 
-function App({ isAuthenticated }) {
+function App({ isAuthenticated, signIn }) {
   return (
     <>
       <AppHeader />
       <main>
         {!isAuthenticated ? (
-          <Authentication />
+          <Authentication signIn={signIn} />
         ) : (
           <>
             <NoteEditor />
@@ -31,7 +31,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  signIn: authActions.signOut,
+  signIn: authOperations.signIn,
 };
 
 export default connect(
