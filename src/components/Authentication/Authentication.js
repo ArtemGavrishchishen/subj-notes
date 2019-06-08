@@ -33,6 +33,7 @@ export default class Authentication extends Component {
             className={styles.input}
             type="text"
             value={userName}
+            required
             onChange={this.handleChangeInput}
             placeholder="Your name"
           />

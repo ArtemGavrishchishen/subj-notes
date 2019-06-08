@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import ModalNote from './ModalNote/ModalNote';
 import AppHeader from './AppHeader/AppHeader';
 import Authentication from './Authentication/Authentication';
 import NoteEditor from './NoteEditor/NoteEditor';
@@ -11,6 +12,7 @@ import { authOperations, authSelectors } from '../redux/auth';
 function App({ isAuthenticated, signIn }) {
   return (
     <>
+      <ModalNote />
       <AppHeader />
       <main>
         {!isAuthenticated ? (

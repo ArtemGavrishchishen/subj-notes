@@ -2,15 +2,25 @@ const FETCH_REQUEST = 'notes/FETCH_REQUEST';
 const FETCH_SUCCESS = 'notes/FETCH_SUCCESS';
 const FETCH_ERROR = 'notes/FETCH_ERROR';
 
-const ADD = 'note/ADD';
+const ADD_REQUEST = 'note/ADD_REQUEST';
+const ADD_SUCCESS = 'note/ADD_SUCCESS';
+const ADD_ERROR = 'note/ADD_ERROR';
+
 const UPDATE = 'note/UPDATE';
-const DELETE = 'note/DELETE';
+
+const DELETE_REQUEST = 'note/DELETE_REQUEST';
+const DELETE_SUCCESS = 'note/DELETE_SUCCESS';
+const DELETE_ERROR = 'note/DELETE_ERROR';
 
 export default {
   FETCH_REQUEST,
   FETCH_SUCCESS,
   FETCH_ERROR,
-  ADD,
+  ADD_REQUEST,
+  ADD_SUCCESS,
+  ADD_ERROR,
   UPDATE,
-  DELETE,
+  DELETE_REQUEST,
+  DELETE_SUCCESS,
+  DELETE_ERROR,
 };

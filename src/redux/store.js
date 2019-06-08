@@ -3,10 +3,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
 import { authReducer } from './auth';
+import { modalReducer } from './modal';
 import { notesReducer } from './notes';
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  modalIsOpen: modalReducer,
   notes: notesReducer,
 });
 

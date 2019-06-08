@@ -10,6 +10,7 @@ const signIn = userName => dispatch => {
   axios
     .post('/tokens', userName)
     .then(({ data }) => {
+      axiosParams.setToken(data);
       dispatch(actions.signInSuccess(data.token));
     })
     .catch(error => dispatch(actions.signInError(error)));
