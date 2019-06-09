@@ -18,7 +18,7 @@ class NoteList extends Component {
   }
 
   render() {
-    const { notes = [], remove, toggleModal } = this.props;
+    const { notes = [], remove, openModal } = this.props;
     return (
       <section className={styles.notes}>
         <ul className={styles.list}>
@@ -31,7 +31,7 @@ class NoteList extends Component {
                   <button
                     type="button"
                     className={styles.btn}
-                    onClick={toggleModal}
+                    onClick={() => openModal(note)}
                   >
                     <Update />
                   </button>
@@ -61,7 +61,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   remove: notesOperations.deleteNote,
   getNotes: notesOperations.getNotes,
-  toggleModal: modalActions.toggleModal,
+  openModal: modalActions.openModal,
   update: () => null,
 };
 

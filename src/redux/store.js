@@ -8,7 +8,7 @@ import { notesReducer } from './notes';
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  modalIsOpen: modalReducer,
+  modal: modalReducer,
   notes: notesReducer,
 });
 

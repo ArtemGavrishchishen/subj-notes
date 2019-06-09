@@ -1,7 +1,12 @@
 import types from './modalActionTypes';
 
-const toggleModal = () => ({
-  type: types.TOGGLE,
+const openModal = id => ({
+  type: types.OPEN_MODAL,
+  payload: id,
 });
 
-export default { toggleModal };
+const closeModal = () => ({
+  type: types.CLOSE_MODAL,
+});
+
+export default { openModal, closeModal };

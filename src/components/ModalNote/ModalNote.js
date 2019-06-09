@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Modal from 'react-modal';
 
 import { modalActions, modalSelectors } from '../../redux/modal';
+import { notesOperations } from '../../redux/notes';
 
 import styles from './ModalNote.module.css';
 
@@ -29,6 +30,17 @@ const INITIAL_STATE = {
 class ModalNote extends Component {
   state = INITIAL_STATE;
 
+  componentDidUpdate() {
+    const { modalIsOpen, modalNote } = this.props;
+    const { id } = this.state;
+
+    if (modalIsOpen && modalNote.id !== id) {
+      /*eslint-disable */
+      this.setState({ ...modalNote });
+      /* eslint-enable */
+    }
+  }
+
   handleChange = e => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
@@ -36,16 +48,20 @@ class ModalNote extends Component {
 
   handleSubmitForm = e => {
     e.preventDefault();
+    const { updateNote, closeModal } = this.props;
+
+    updateNote(this.state);
+    closeModal();
   };
 
   render() {
     const { title, content } = this.state;
-    const { modalIsOpen, toggleModal } = this.props;
+    const { modalIsOpen, closeModal } = this.props;
     return (
       <Modal
         isOpen={modalIsOpen}
         ariaHideApp={false}
-        onRequestClose={toggleModal}
+        onRequestClose={closeModal}
         style={customStyles}
       >
         <section className={styles.editor}>
@@ -80,9 +96,11 @@ class ModalNote extends Component {
 
 const mapStateToProps = state => ({
   modalIsOpen: modalSelectors.modalIsOpen(state),
+  modalNote: modalSelectors.modalNote(state),
 });
 const mapDispatchToProps = {
-  toggleModal: modalActions.toggleModal,
+  closeModal: modalActions.closeModal,
+  updateNote: notesOperations.updateNote,
 };
 
 export default connect(

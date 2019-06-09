@@ -16,6 +16,9 @@ function notesReducer(state = INIT_NOTES, { type, payload }) {
     case types.DELETE_SUCCESS:
       return state.filter(note => note.id !== payload);
 
+    case types.UPDATE_SUCCESS:
+      return state.map(note => (note.id === payload.id ? payload : note));
+
     default:
       return state;
   }

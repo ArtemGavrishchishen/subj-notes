@@ -33,7 +33,8 @@ const updateNote = note => dispatch => {
       content: note.content || '',
     })
     .then(({ data }) => {
-      dispatch(actions.updateNoteSuccess(data.notes));
+      console.log(data);
+      dispatch(actions.updateNoteSuccess(data));
     })
     .catch(error => dispatch(actions.updateNoteError(error)));
 };
