@@ -39,15 +39,21 @@ const updateNote = note => dispatch => {
     .catch(error => dispatch(actions.updateNoteError(error)));
 };
 
-const addNote = note => dispatch => {
+const addNote = (note, source) => dispatch => {
   dispatch(actions.addNoteRequest());
 
   axios
-    .post('/notes', note)
+    .post('/notes', note, {
+      cancelToken: source.token,
+    })
     .then(({ data }) => {
       dispatch(actions.addNoteSuccess(data));
     })
-    .catch(error => dispatch(actions.addNoteError(error)));
+    .catch(error =>
+      axios.isCancel(error)
+        ? console.log('Request canceled', error.message)
+        : dispatch(actions.addNoteError(error)),
+    );
 };
 
 const deleteNote = id => dispatch => {

@@ -18,7 +18,7 @@ class NoteList extends Component {
   }
 
   render() {
-    const { notes = [], remove, openModal } = this.props;
+    const { notes = [], openModal, remove } = this.props;
     return (
       <section className={styles.notes}>
         <ul className={styles.list}>
@@ -62,7 +62,6 @@ const mapDispatchToProps = {
   remove: notesOperations.deleteNote,
   getNotes: notesOperations.getNotes,
   openModal: modalActions.openModal,
-  update: () => null,
 };
 
 export default connect(

@@ -6,10 +6,12 @@ import AppHeader from './AppHeader/AppHeader';
 import Authentication from './Authentication/Authentication';
 import NoteEditor from './NoteEditor/NoteEditor';
 import NoteList from './NoteList/NoteList';
+import Snackbar from './Snackbar/Snackbar';
 
 import { authOperations, authSelectors } from '../redux/auth';
+import { snackbarSelectors } from '../redux/snackbar';
 
-function App({ isAuthenticated, signIn }) {
+function App({ isAuthenticated, signIn, snackbarIsOpen }) {
   return (
     <>
       <ModalNote />
@@ -21,6 +23,7 @@ function App({ isAuthenticated, signIn }) {
           <>
             <NoteEditor />
             <NoteList />
+            {snackbarIsOpen && <Snackbar />}
           </>
         )}
       </main>
@@ -30,6 +33,7 @@ function App({ isAuthenticated, signIn }) {
 
 const mapStateToProps = state => ({
   isAuthenticated: authSelectors.getIsAuthenticated(state),
+  snackbarIsOpen: snackbarSelectors.snackbarIsOpen(state),
 });
 
 const mapDispatchToProps = {

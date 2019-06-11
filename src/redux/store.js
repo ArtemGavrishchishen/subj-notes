@@ -4,11 +4,13 @@ import thunk from 'redux-thunk';
 
 import { authReducer } from './auth';
 import { modalReducer } from './modal';
+import { snackbarReducer } from './snackbar';
 import { notesReducer } from './notes';
 
 const rootReducer = combineReducers({
   auth: authReducer,
   modal: modalReducer,
+  snackbar: snackbarReducer,
   notes: notesReducer,
 });
 
