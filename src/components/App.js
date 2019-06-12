@@ -9,9 +9,8 @@ import NoteList from './NoteList/NoteList';
 import Snackbar from './Snackbar/Snackbar';
 
 import { authOperations, authSelectors } from '../redux/auth';
-import { snackbarSelectors } from '../redux/snackbar';
 
-function App({ isAuthenticated, signIn, snackbarIsOpen }) {
+function App({ isAuthenticated, signIn }) {
   return (
     <>
       <ModalNote />
@@ -23,7 +22,7 @@ function App({ isAuthenticated, signIn, snackbarIsOpen }) {
           <>
             <NoteEditor />
             <NoteList />
-            {snackbarIsOpen && <Snackbar />}
+            <Snackbar />
           </>
         )}
       </main>
@@ -33,7 +32,6 @@ function App({ isAuthenticated, signIn, snackbarIsOpen }) {
 
 const mapStateToProps = state => ({
   isAuthenticated: authSelectors.getIsAuthenticated(state),
-  snackbarIsOpen: snackbarSelectors.snackbarIsOpen(state),
 });
 
 const mapDispatchToProps = {

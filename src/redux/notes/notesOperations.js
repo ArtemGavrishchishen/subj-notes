@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import actions from './notesActions';
+import snackbar from '../snackbar/snackbarActions';
 
 const getNotes = () => dispatch => {
   dispatch(actions.fetchNotesRequest());
@@ -42,18 +43,39 @@ const updateNote = note => dispatch => {
 const addNote = (note, source) => dispatch => {
   dispatch(actions.addNoteRequest());
 
-  axios
-    .post('/notes', note, {
-      cancelToken: source.token,
-    })
-    .then(({ data }) => {
-      dispatch(actions.addNoteSuccess(data));
-    })
-    .catch(error =>
-      axios.isCancel(error)
-        ? console.log('Request canceled', error.message)
-        : dispatch(actions.addNoteError(error)),
-    );
+  dispatch(snackbar.opeanSnackbar(source));
+
+  setTimeout(() => {
+    dispatch(snackbar.closeSnackbar());
+
+    axios
+      .post('/notes', note, {
+        cancelToken: source.token,
+      })
+      .then(({ data }) => {
+        dispatch(actions.addNoteSuccess(data));
+
+        dispatch(snackbar.successSnackbar());
+        setTimeout(() => {
+          dispatch(snackbar.closeSnackbar());
+        }, 2000);
+      })
+      .catch(error => {
+        if (axios.isCancel(error)) {
+          dispatch(snackbar.infoSnackbar());
+          setTimeout(() => {
+            dispatch(snackbar.closeSnackbar());
+          }, 2000);
+          return;
+        }
+        dispatch(actions.addNoteError(error));
+
+        dispatch(snackbar.errorSnackbar());
+        setTimeout(() => {
+          dispatch(snackbar.closeSnackbar());
+        }, 2000);
+      });
+  }, 2000);
 };
 
 const deleteNote = id => dispatch => {

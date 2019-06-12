@@ -26,7 +26,26 @@ function snackbarSourceReducer(state = null, { type, payload }) {
   }
 }
 
+function snackbarMarkReducer(state = null, { type }) {
+  switch (type) {
+    case types.OPEN_SNACKBAR:
+      return 'warning';
+    case types.ERROR_SNACKBAR:
+      return 'error';
+    case types.INFO_SNACKBAR:
+      return 'info';
+    case types.SUCCESS_SNACKBAR:
+      return 'success';
+    case types.CLOSE_SNACKBAR:
+      return null;
+
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   snackbarSource: snackbarSourceReducer,
+  snackbarMark: snackbarMarkReducer,
   snackbarIsOpen: snackbarIsOpenReducer,
 });

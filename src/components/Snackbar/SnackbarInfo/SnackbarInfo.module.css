@@ -9,7 +9,7 @@
   min-height: 40px;
   line-height: 40px;
   color: #ffffff;
-  background-color: #43a047;
+  background-color: rgb(23, 105, 170);
   box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2),
     0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
   padding: 6px 16px;
@@ -27,17 +27,6 @@
   outline: none;
   margin: 0;
   padding: 0;
-}
-
-.undo {
-  composes: btn;
-  color: #ffffff;
-  margin-right: 20px;
-  transition: color 0.2s linear;
-}
-
-.undo:hover {
-  color: rgb(0, 110, 255);
 }
 
 .cancel {

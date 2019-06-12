@@ -9,4 +9,22 @@ const closeSnackbar = () => ({
   type: types.CLOSE_SNACKBAR,
 });
 
-export default { opeanSnackbar, closeSnackbar };
+const errorSnackbar = () => ({
+  type: types.ERROR_SNACKBAR,
+});
+
+const infoSnackbar = () => ({
+  type: types.INFO_SNACKBAR,
+});
+
+const successSnackbar = () => ({
+  type: types.SUCCESS_SNACKBAR,
+});
+
+export default {
+  opeanSnackbar,
+  closeSnackbar,
+  errorSnackbar,
+  infoSnackbar,
+  successSnackbar,
+};

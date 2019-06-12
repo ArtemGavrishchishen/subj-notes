@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { CancelToken } from 'axios';
 
 import { notesOperations } from '../../redux/notes';
-import { snackbarActions } from '../../redux/snackbar';
 
 import styles from './NoteEditor.module.css';
 
@@ -22,15 +21,10 @@ class NoteEditor extends Component {
 
   handleSubmitForm = e => {
     e.preventDefault();
-    const { addNote, opeanSnackbar, closeSnackbar } = this.props;
+    const { addNote } = this.props;
     const source = CancelToken.source();
 
-    opeanSnackbar(source);
-    setTimeout(() => {
-      closeSnackbar();
-      addNote(this.state, source);
-      this.setState({ ...INITIAL_STATE });
-    }, 2000);
+    addNote(this.state, source);
   };
 
   render() {
@@ -67,8 +61,6 @@ class NoteEditor extends Component {
 
 const mapDispatchToProps = {
   addNote: notesOperations.addNote,
-  opeanSnackbar: snackbarActions.opeanSnackbar,
-  closeSnackbar: snackbarActions.closeSnackbar,
 };
 
 export default connect(
