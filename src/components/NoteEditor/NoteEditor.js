@@ -25,6 +25,8 @@ class NoteEditor extends Component {
     const source = CancelToken.source();
 
     addNote(this.state, source);
+
+    this.setState({ ...INITIAL_STATE });
   };
 
   render() {

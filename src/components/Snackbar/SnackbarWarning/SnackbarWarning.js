@@ -14,7 +14,7 @@ const cancellation = (source, closeSnackbar) => {
 const SnackbarWarning = ({ closeSnackbar, source }) => {
   return (
     <div className={styles.snackbar}>
-      <div className={styles.message}>This is a warning message!</div>
+      <div className={styles.message}>You can cancell your action!</div>
       <div className={styles.action}>
         <button
           type="button"
