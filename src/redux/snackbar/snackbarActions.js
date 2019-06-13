@@ -1,30 +1,30 @@
 import types from './snackbarActionTypes';
 
-const opeanSnackbar = source => ({
+const opean = source => ({
   type: types.OPEN_SNACKBAR,
   payload: source,
 });
 
-const closeSnackbar = () => ({
+const close = () => ({
   type: types.CLOSE_SNACKBAR,
 });
 
-const errorSnackbar = () => ({
+const error = () => ({
   type: types.ERROR_SNACKBAR,
 });
 
-const infoSnackbar = () => ({
+const info = () => ({
   type: types.INFO_SNACKBAR,
 });
 
-const successSnackbar = () => ({
+const success = () => ({
   type: types.SUCCESS_SNACKBAR,
 });
 
 export default {
-  opeanSnackbar,
-  closeSnackbar,
-  errorSnackbar,
-  infoSnackbar,
-  successSnackbar,
+  opean,
+  close,
+  error,
+  info,
+  success,
 };

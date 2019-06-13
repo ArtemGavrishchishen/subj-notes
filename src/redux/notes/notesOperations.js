@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import snackbarTimeout from '../../configs/snackbarTimeout';
 import actions from './notesActions';
 import snackbar from '../snackbar/snackbarActions';
 
@@ -43,10 +44,10 @@ const updateNote = note => dispatch => {
 const addNote = (note, source) => dispatch => {
   dispatch(actions.addNoteRequest());
 
-  dispatch(snackbar.opeanSnackbar(source));
+  dispatch(snackbar.opean(source));
 
   setTimeout(() => {
-    dispatch(snackbar.closeSnackbar());
+    dispatch(snackbar.close());
 
     axios
       .post('/notes', note, {
@@ -55,38 +56,46 @@ const addNote = (note, source) => dispatch => {
       .then(({ data }) => {
         dispatch(actions.addNoteSuccess(data));
 
-        dispatch(snackbar.successSnackbar());
-        setTimeout(() => {
-          dispatch(snackbar.closeSnackbar());
-        }, 2000);
+        snackbarTimeout(dispatch, snackbar.success, snackbar.close);
       })
       .catch(error => {
         if (axios.isCancel(error)) {
-          dispatch(snackbar.infoSnackbar());
-          setTimeout(() => {
-            dispatch(snackbar.closeSnackbar());
-          }, 2000);
+          snackbarTimeout(dispatch, snackbar.info, snackbar.close);
           return;
         }
         dispatch(actions.addNoteError(error));
 
-        dispatch(snackbar.errorSnackbar());
-        setTimeout(() => {
-          dispatch(snackbar.closeSnackbar());
-        }, 2000);
+        snackbarTimeout(dispatch, snackbar.error, snackbar.close);
       });
   }, 2000);
 };
 
-const deleteNote = id => dispatch => {
+const deleteNote = (id, source) => dispatch => {
   dispatch(actions.deleteNoteRequest());
 
-  axios
-    .delete(`/notes/${id}`)
-    .then(() => {
-      dispatch(actions.deleteNoteSuccess(id));
-    })
-    .catch(error => dispatch(actions.deleteNoteError(error)));
+  dispatch(snackbar.opean(source));
+
+  setTimeout(() => {
+    dispatch(snackbar.close());
+    axios
+      .delete(`/notes/${id}`, {
+        cancelToken: source.token,
+      })
+      .then(() => {
+        dispatch(actions.deleteNoteSuccess(id));
+
+        snackbarTimeout(dispatch, snackbar.success, snackbar.close);
+      })
+      .catch(error => {
+        if (axios.isCancel(error)) {
+          snackbarTimeout(dispatch, snackbar.info, snackbar.close);
+          return;
+        }
+        dispatch(actions.deleteNoteError(error));
+
+        snackbarTimeout(dispatch, snackbar.error, snackbar.close);
+      });
+  }, 2000);
 };
 
 export default {

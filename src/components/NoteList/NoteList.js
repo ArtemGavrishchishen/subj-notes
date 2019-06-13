@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { CancelToken } from 'axios';
 
 import { ReactComponent as Delete } from './assets/delete.svg';
 import { ReactComponent as Update } from './assets/update.svg';
@@ -17,8 +18,15 @@ class NoteList extends Component {
     getNotes();
   }
 
+  handleDeleteNote = id => {
+    const { remove } = this.props;
+    const source = CancelToken.source();
+
+    remove(id, source);
+  };
+
   render() {
-    const { notes = [], openModal, remove } = this.props;
+    const { notes = [], openModal } = this.props;
     return (
       <section className={styles.notes}>
         <ul className={styles.list}>
@@ -40,7 +48,7 @@ class NoteList extends Component {
                   <button
                     type="button"
                     className={styles.btn}
-                    onClick={() => remove(note.id)}
+                    onClick={() => this.handleDeleteNote(note.id)}
                   >
                     <Delete />
                   </button>

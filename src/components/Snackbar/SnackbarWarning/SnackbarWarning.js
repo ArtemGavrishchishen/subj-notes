@@ -36,7 +36,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  closeSnackbar: snackbarActions.closeSnackbar,
+  closeSnackbar: snackbarActions.close,
 };
 
 export default connect(
